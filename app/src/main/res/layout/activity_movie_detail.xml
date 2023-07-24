@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.MovieDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/CustomizeAppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_movie_detail_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme = "@style/CustomizePopupOverlay">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:elevation="@dimen/card_view_elevation"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                app:cardCornerRadius="@dimen/card_view_corner_radius">
+                <ImageView
+                    android:id="@+id/iv_movie_detail_image"
+                    android:layout_width="@dimen/item_movie_detail_image_width"
+                    android:layout_height="@dimen/item_movie_detail_image_height"
+                    android:contentDescription="@string/image_contentDescription"
+                    android:src="@drawable/ic_movie_place_holder"
+                    android:scaleType="fitXY"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_detail_genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text_color"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                tools:text="Genre"/>
+
+            <TextView
+                android:id="@+id/tv_detail_Movie_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/primary_text_color"
+                android:textSize="26sp"
+
+                android:layout_marginBottom="15dp"
+                tools:text="Movie Title"/>
+
+            <TextView
+                android:id="@+id/tv_movie_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text_color"
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"
+                tools:text="release date"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_to_favorite"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                app:cornerRadius="15dp"
+                android:gravity="center"
+                android:backgroundTint="@color/add_to_favorite_color"
+                android:textColor="@color/white"
+                android:drawableLeft="@drawable/ic_baseline_favorite_white_24"
+                android:drawablePadding="2dp"
+                android:text="@string/add_to_favorite"
+                android:textSize="18sp"
+                />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

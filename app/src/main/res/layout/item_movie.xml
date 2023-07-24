@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="@dimen/item_movie_content_marginBottom">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/item_movie_content_padding">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="@dimen/card_view_elevation"
+            app:cardCornerRadius="@dimen/card_view_corner_radius">
+        <ImageView
+            android:id="@+id/iv_movie_image"
+            android:layout_width="@dimen/item_movie_image_width"
+            android:layout_height="@dimen/item_movie_image_height"
+            android:contentDescription="@string/image_contentDescription"
+            android:background="@drawable/image_border"
+            android:src="@drawable/ic_movie_place_holder"
+            android:scaleType="fitXY"/>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_movie_name_layout_marginStart"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="@dimen/item_movie_secondary_text_size"
+                android:layout_marginBottom="5dp"
+                tools:text="Genre"/>
+
+            <TextView
+                android:id="@+id/tv_Movie_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text_color"
+                android:textSize="@dimen/item_movie_name_text_size"
+
+                android:layout_marginBottom="5dp"
+                tools:text="Movie Title"/>
+
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="@dimen/item_movie_secondary_text_size"
+                android:layout_marginBottom="5dp"
+                tools:text="release date"/>
+
+            <TextView
+                android:id="@+id/tv_view_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="@dimen/item_view_more_text_size"
+                android:layout_marginTop="30dp"
+
+                android:text="@string/view_more"/>
+
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_delete_board"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_gravity="center_vertical|end"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:contentDescription="@string/image_contentDescription"-->
+<!--                android:src="@drawable/ic_delete"-->
+<!--                android:visibility="visible" />-->
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_movie_divider_height"
+        android:layout_marginTop="@dimen/item_movie_divider_marginTop"
+        android:background="@color/divider_color"/>
+
+</LinearLayout>
