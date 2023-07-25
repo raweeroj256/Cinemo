@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,10 +22,14 @@ import je.raweeroj.cinemo.models.MovieResponse
 import je.raweeroj.cinemo.network.MovieService
 import je.raweeroj.cinemo.utils.Constants
 import retrofit.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private var binding : ActivityMainBinding? = null
     private var mProgressDialog : Dialog? = null
+    private var movieList:MovieResponse? = null
+    private var adapter:MovieListItemsAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,6 +38,26 @@ class MainActivity : AppCompatActivity() {
         setupActionBar()
         getMovieList()
 
+
+
+    }
+
+    private fun filterList(query: String?) {
+        if(query != null){
+            val filteredList = ArrayList<Movie>()
+            for (i in movieList!!.movies){
+                if(i.title_en.toLowerCase(Locale.ROOT).contains(query)){
+                    filteredList.add(i)
+                }
+            }
+
+           // Log.i("filteredList",filteredList.toString())
+            if(filteredList.isEmpty()){
+                Toast.makeText(this,"No movie found...",Toast.LENGTH_SHORT).show()
+            }else{
+                adapter!!.setFilteredList(filteredList.toList())
+            }
+        }
     }
 
     fun getMovieList(){
@@ -53,13 +78,11 @@ class MainActivity : AppCompatActivity() {
                 @RequiresApi(Build.VERSION_CODES.N)
                 override fun onResponse(response: Response<MovieResponse>?, retrofit: Retrofit?) {
                     if(response!!.isSuccess){
-                        hideProgressDialog()
 
-                        val movieList:MovieResponse = response.body()
 
-                        val movieJsonString = Gson().toJson(movieList)
+                        movieList = response.body()
 
-                        setupUI(movieList)
+                        setupUI(movieList!!)
                         Log.i("Response result","$movieList")
                     }else{
                         val rc = response.code()
@@ -90,6 +113,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI(movieList : MovieResponse) {
+        hideProgressDialog()
         if(movieList != null){
             binding?.tvNoMoviesAvailable?.visibility = View.GONE
             binding?.rvMoviesList?.visibility = View.VISIBLE
@@ -98,10 +122,10 @@ class MainActivity : AppCompatActivity() {
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
             binding?.rvMoviesList?.setHasFixedSize(true)
 
-            val adapter = MovieListItemsAdapter(this,movieList.movies.toList())
+            adapter = MovieListItemsAdapter(this,movieList.movies.toList())
             binding?.rvMoviesList?.adapter = adapter
 
-            adapter.setOnClickListener(object :MovieListItemsAdapter.OnClickListener{
+            adapter!!.setOnClickListener(object :MovieListItemsAdapter.OnClickListener{
                 override fun onClick(position: Int, model: Movie) {
                     val intent = Intent(this@MainActivity,MovieDetailActivity::class.java)
                     intent.putExtra(Constants.MOVIE_ID,model)
@@ -109,9 +133,25 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
+
+
             })
+            binding?.svMain?.visibility = View.VISIBLE
+            binding?.svMain?.clearFocus()
+            binding?.svMain?.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    filterList(newText)
+                    return true
+                }
+            }
+            )
 
         }else{
+            binding?.svMain?.visibility = View.GONE
             binding?.tvNoMoviesAvailable?.visibility = View.VISIBLE
             binding?.rvMoviesList?.visibility = View.GONE
         }
@@ -135,7 +175,6 @@ class MainActivity : AppCompatActivity() {
 
         when(item.itemId){
             R.id.action_favorite -> {
-                //TODO : Move to favorite screen
                 var intent = Intent(this@MainActivity,MyFavoriteActivity::class.java)
                 startActivity(intent)
 

@@ -23,6 +23,22 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/sv_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp"
+        android:background="@drawable/search_view_background"
+        app:queryHint="Search Movie Name Here..."
+        app:iconifiedByDefault="false"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
 
 
     <androidx.cardview.widget.CardView
@@ -32,32 +48,39 @@
         android:elevation="@dimen/card_view_elevation"
         app:cardCornerRadius="@dimen/card_view_corner_radius">
 
-        <TextView
-            android:id="@+id/tv_movieFinder_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:gravity="start"
-            android:text="@string/movie_finder_title"
-            android:textColor="@color/lightgrey_text_color"
-            android:textSize="@dimen/movie_finder_title_text_size" />
+            <TextView
+                android:id="@+id/tv_movieFinder_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:text="@string/movie_finder_title"
+                android:textColor="@color/lightgrey_text_color"
+                android:textSize="@dimen/movie_finder_title_text_size" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_movies_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            android:visibility="gone"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_movies_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+
 
         <TextView
             android:id="@+id/tv_no_movies_available"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/no_movies_are_available"
             android:gravity="center"
+            android:text="@string/no_movies_are_available"
             android:textColor="@color/secondary_text_color"
-            android:textSize="@dimen/no_movies_available_text_size"/>
+            android:textSize="@dimen/no_movies_available_text_size" />
 
     </androidx.cardview.widget.CardView>
 
