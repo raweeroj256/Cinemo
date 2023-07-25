@@ -10,7 +10,7 @@
     <string name="add_to_favorite">Add to Favorite</string>
 
     <string name="no_favorite_added_yet">No Favorite Movie Added Yet</string>
-
+    <string name="about">About this movie</string>
 
 
 </resources>

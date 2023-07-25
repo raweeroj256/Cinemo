@@ -8,12 +8,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import je.raweeroj.cinemo.R
 import je.raweeroj.cinemo.adapters.FavoriteMovieListItemsAdapter
-import je.raweeroj.cinemo.adapters.MovieListItemsAdapter
 import je.raweeroj.cinemo.app.MovieApplication
 import je.raweeroj.cinemo.databinding.ActivityMyFavoriteBinding
 import je.raweeroj.cinemo.models.Movie
 import je.raweeroj.cinemo.models.MovieDAO
-import je.raweeroj.cinemo.models.MovieDatabase
 import je.raweeroj.cinemo.models.MovieEntity
 import je.raweeroj.cinemo.utils.Constants
 import kotlinx.coroutines.launch
@@ -32,10 +30,9 @@ class MyFavoriteActivity : AppCompatActivity() {
         lifecycleScope.launch{
             movieDao.fetchAllMovie().collect{
                 val list = ArrayList(it)
-                setupListofDataIntoRecyclerView(list.toList(),movieDao)
+                setupListofDataIntoRecyclerView(list.toList())
             }
         }
-
 
     }
 
@@ -52,7 +49,7 @@ class MyFavoriteActivity : AppCompatActivity() {
 
     }
 
-    private fun setupListofDataIntoRecyclerView(movieList:List<MovieEntity>,movieDao: MovieDAO){
+    private fun setupListofDataIntoRecyclerView(movieList:List<MovieEntity>){
         if(movieList.isNotEmpty()){
             val adapter = FavoriteMovieListItemsAdapter(this,movieList)
             binding?.rvMoviesFavoriteList?.adapter = adapter

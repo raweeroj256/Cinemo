@@ -56,7 +56,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:text="@string/movie_finder_title"
-                android:textColor="@color/lightgrey_text_color"
+                android:textColor="@color/secondary_text_color"
+                android:textStyle="bold"
                 android:textSize="@dimen/movie_finder_title_text_size" />
 
 

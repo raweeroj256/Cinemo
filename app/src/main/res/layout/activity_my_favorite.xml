@@ -36,9 +36,11 @@
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
             android:gravity="start"
             android:text="@string/my_favorite"
-            android:textColor="@color/lightgrey_text_color"
+            android:textColor="@color/secondary_text_color"
+            android:textStyle="bold"
             android:textSize="@dimen/movie_finder_title_text_size" />
 
         <androidx.recyclerview.widget.RecyclerView

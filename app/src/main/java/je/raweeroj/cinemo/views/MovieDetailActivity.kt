@@ -57,21 +57,35 @@ class MovieDetailActivity : AppCompatActivity() {
             }
 
             binding?.btnAddToFavorite?.setOnClickListener{
-                lifecycleScope.launch{
-                    movieDao.fetchMovieById(movies!!.id).first().let {
-                        var list = ArrayList(it)
-                        Log.i("temp list", list.toString())
-                        if (list.size > 0) {
-                            Toast.makeText(
-                                this@MovieDetailActivity,
-                                "You Already Added this movie as favorite!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            addToFavorite(movieDao)
+                try{
+                    lifecycleScope.launch{
+                        movieDao.fetchMovieById(movies!!.id).first().let {
+                            var list = ArrayList(it)
+                            Log.i("temp list", list.toString())
+                            if (list.size > 0) {
+                                Toast.makeText(
+                                    this@MovieDetailActivity,
+                                    "You Already Added this movie as favorite!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                try{
+                                    addToFavorite(movieDao)
+                                }catch (e:Exception){
+                                    Toast.makeText(this@MovieDetailActivity,"OOPS! something went wrong please try again!",
+                                        Toast.LENGTH_SHORT).show()
+                                    e.printStackTrace()
+                                }
+
+                            }
                         }
                     }
+                }catch (e:Exception){
+                    Toast.makeText(this@MovieDetailActivity,"OOPS! something went wrong please try again!",
+                        Toast.LENGTH_SHORT).show()
+                    e.printStackTrace()
                 }
+
 
 
             }
@@ -95,7 +109,6 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun addToFavorite(movieDAO: MovieDAO){
         var moviecode = movies!!.movieCode[0]
-        var result = 0
         if(movies!=null){
             lifecycleScope.launch{
                 movieDAO.insert(MovieEntity(movies!!.id ,moviecode, movies!!.title_en ,
